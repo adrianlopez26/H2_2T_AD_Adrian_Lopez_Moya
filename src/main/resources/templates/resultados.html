@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados</title>
+</head>
+<body>
+<h1>Resultados del Análisis</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Comunidad</th>
+        <th>Total Desempleo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="resultado : ${resultados}">
+        <td th:text="${resultado[0]}"></td>
+        <td th:text="${resultado[1]}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
