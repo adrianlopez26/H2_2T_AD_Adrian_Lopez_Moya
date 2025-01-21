@@ -1,44 +1,52 @@
 package com.empresa.paro.repository;
 
 import com.empresa.paro.entity.Paro;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ParoRepository extends JpaRepository<Paro, Integer> {
+@Repository
+public interface ParoRepository extends CrudRepository<Paro, Integer> {
 
-    @Query("SELECT c.comunidad, SUM(p.total) FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad")
-    List<Object[]> totalDesempleoPorComunidad();
+    // Consulta 1: Total desempleo por comunidad
+    @Query(value = "SELECT c.Comunidad, SUM(p.Total) AS Total FROM paro p JOIN comunidad c ON p.CodigoComunidad = c.Codigo GROUP BY c.Comunidad", nativeQuery = true)
+    List<Object[]> findTotalDesempleoPorComunidad();
 
-    @Query("SELECT p.sexo, SUM(p.total) FROM Paro p GROUP BY p.sexo")
-    List<Object[]> totalDesempleoPorSexo();
+    // Consulta 2: Porcentaje de desempleo por sexo
+    @Query(value = "SELECT Sexo, (SUM(Total) / (SELECT SUM(Total) FROM paro) * 100) AS Porcentaje FROM paro GROUP BY Sexo", nativeQuery = true)
+    List<Object[]> findPorcentajeDesempleoPorSexo();
 
-    @Query("SELECT p.edad, SUM(p.total) FROM Paro p GROUP BY p.edad")
-    List<Object[]> totalDesempleoPorEdad();
+    // Consulta 3: Promedio de desempleo por período
+    @Query(value = "SELECT Periodo, AVG(Total) AS Promedio FROM paro GROUP BY Periodo", nativeQuery = true)
+    List<Object[]> findPromedioDesempleoPorPeriodo();
 
-    @Query("SELECT c.comunidad, AVG(p.total) FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad")
-    List<Object[]> promedioDesempleoPorComunidad();
+    // Consulta 4: Total de desempleo por edad
+    @Query(value = "SELECT Edad, SUM(Total) AS Total FROM paro GROUP BY Edad", nativeQuery = true)
+    List<Object[]> findDesempleoPorEdad();
 
-    @Query("SELECT c.comunidad, SUM(p.total) AS total FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad ORDER BY total DESC LIMIT 1")
-    List<Object[]> comunidadConMayorDesempleo();
+    // Consulta 5: Comunidad con mayor desempleo
+    @Query(value = "SELECT c.Comunidad, SUM(p.Total) AS Total FROM paro p JOIN comunidad c ON p.CodigoComunidad = c.Codigo GROUP BY c.Comunidad ORDER BY Total DESC LIMIT 1", nativeQuery = true)
+    List<Object[]> findComunidadConMayorDesempleo();
 
-    @Query("SELECT c.comunidad, SUM(p.total) AS total FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad ORDER BY total ASC LIMIT 1")
-    List<Object[]> comunidadConMenorDesempleo();
+    // Consulta 6: Comunidad con menor desempleo
+    @Query(value = "SELECT c.Comunidad, SUM(p.Total) AS Total FROM paro p JOIN comunidad c ON p.CodigoComunidad = c.Codigo GROUP BY c.Comunidad ORDER BY Total ASC LIMIT 1", nativeQuery = true)
+    List<Object[]> findComunidadConMenorDesempleo();
 
-    @Query("SELECT c.comunidad, p.sexo, SUM(p.total) FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad, p.sexo")
-    List<Object[]> desempleoPorSexoYComunidad();
+    // Consulta 7: Conteo de desempleo por sexo
+    @Query(value = "SELECT Sexo, COUNT(*) AS Total FROM paro GROUP BY Sexo", nativeQuery = true)
+    List<Object[]> findConteoDesempleoPorSexo();
 
-    @Query("SELECT c.comunidad, p.periodo, SUM(p.total) FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad, p.periodo ORDER BY c.comunidad, p.periodo")
-    List<Object[]> tendenciaDesempleoPorPeriodo();
+    // Consulta 8: Total de desempleo por periodo
+    @Query(value = "SELECT Periodo, SUM(Total) AS Total FROM paro GROUP BY Periodo", nativeQuery = true)
+    List<Object[]> findDesempleoPorPeriodo();
 
-    @Query("""
-           SELECT c.comunidad, p.sexo,
-                  (SUM(p.total) / (SELECT SUM(p2.total) FROM Paro p2 WHERE p2.comunidad.codigo = c.codigo) * 100) 
-           FROM Paro p JOIN p.comunidad c GROUP BY c.comunidad, p.sexo
-           """)
-    List<Object[]> porcentajeDesempleoPorSexo();
+    // Consulta 9: Promedio de desempleo por edad
+    @Query(value = "SELECT Edad, AVG(Total) AS Promedio FROM paro GROUP BY Edad", nativeQuery = true)
+    List<Object[]> findPromedioDesempleoPorEdad();
 
-    @Query("SELECT c.comunidad, SUM(p.total) FROM Paro p JOIN p.comunidad c WHERE p.edad = '25-34' GROUP BY c.comunidad")
-    List<Object[]> desempleoPorComunidadYRangoEdad();
+    // Consulta 10: Comunidad con mayor paro
+    @Query(value = "SELECT c.Comunidad, MAX(p.Total) AS Mayor FROM paro p JOIN comunidad c ON p.CodigoComunidad = c.Codigo GROUP BY c.Comunidad ORDER BY Mayor DESC LIMIT 1", nativeQuery = true)
+    List<Object[]> findComunidadConMayorParo();
 }

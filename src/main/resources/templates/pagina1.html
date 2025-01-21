@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Página 1</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Resultados de los Análisis - Página 1</h1>
+
+    <h2>Total Desempleo por Comunidad</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Comunidad</th>
+            <th>Total Desempleo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resultado : ${resultadoConsulta1}">
+            <td th:text="${resultado[0]}"></td>
+            <td th:text="${resultado[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Porcentaje Desempleo por Sexo</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Sexo</th>
+            <th>Porcentaje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resultado : ${resultadoConsulta2}">
+            <td th:text="${resultado[0]}"></td>
+            <td th:text="${resultado[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Promedio de Desempleo por Periodo</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Periodo</th>
+            <th>Promedio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resultado : ${resultadoConsulta3}">
+            <td th:text="${resultado[0]}"></td>
+            <td th:text="${resultado[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Total Desempleo por Edad</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Edad</th>
+            <th>Total Desempleo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resultado : ${resultadoConsulta4}">
+            <td th:text="${resultado[0]}"></td>
+            <td th:text="${resultado[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Comunidad con Mayor Desempleo</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Comunidad</th>
+            <th>Total Desempleo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${resultadoConsulta5 != null}">
+            <td th:text="${resultadoConsulta5[0]}"></td>
+            <td th:text="${resultadoConsulta5[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/">Volver Inicio</a>
+    <a href="/pagina2">Ir a Página 2</a>
+</div>
+</body>
+</html>

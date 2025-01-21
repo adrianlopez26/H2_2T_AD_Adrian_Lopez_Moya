@@ -1,3 +1,4 @@
+
 create database PARO;
 use PARO;
 
@@ -20,7 +21,7 @@ ALTER TABLE PARO
 ADD COLUMN CodigoComunidad char(2);
 
 set SQL_SAFE_UPDATES = 0;
-UPDATE PARO SET CodigoComunidad = left(Comunidad, 2);
+UPDATE PARO SET CodigoComunidad = left(comunidad, 2);
 set SQL_SAFE_UPDATES = 1;
 
 
@@ -103,6 +104,13 @@ WHERE p.Edad = '25-34'
 GROUP BY c.Comunidad;
 
 
+# Con todo creado añade estos comandos al final del fichero sql.sql
 
+SET SESSION sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));
+
+SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));
+
+
+--
 
 

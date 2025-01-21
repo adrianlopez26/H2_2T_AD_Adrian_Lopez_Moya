@@ -1,16 +1,17 @@
+// Comunidad.java
 package com.empresa.paro.entity;
 
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "comunidad")
 public class Comunidad {
 
     @Id
-    @Column(name = "Codigo", length = 2)
+    @Column(name = "Codigo")
     private String codigo;
 
-    @Column(name = "Comunidad")
     private String comunidad;
 
     @OneToMany(mappedBy = "comunidad", cascade = CascadeType.ALL, orphanRemoval = true)

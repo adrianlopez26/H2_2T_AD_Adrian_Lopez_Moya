@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Página 2</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados de los Análisis - Página 2</h1>
+
+        <h2>Comunidad con Menor Desempleo</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Comunidad</th>
+                <th>Total Desempleo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${resultadoConsulta6 != null}">
+                <td th:text="${resultadoConsulta6[0]}"></td>
+                <td th:text="${resultadoConsulta6[1]}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Conteo de Desempleo por Sexo</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Sexo</th>
+                <th>Conteo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="resultado : ${resultadoConsulta7}">
+                <td th:text="${resultado[0]}"></td>
+                <td th:text="${resultado[1]}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Total Desempleo por Periodo</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Periodo</th>
+                <th>Total Desempleo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="resultado : ${resultadoConsulta8}">
+                <td th:text="${resultado[0]}"></td>
+                <td th:text="${resultado[1]}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Promedio de Desempleo por Edad</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Edad</th>
+                <th>Promedio</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="resultado : ${resultadoConsulta9}">
+                <td th:text="${resultado[0]}"></td>
+                <td th:text="${resultado[1]}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Comunidad con Mayor Paro</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Comunidad</th>
+                <th>Mayor Paro</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${resultadoConsulta10 != null}">
+                <td th:text="${resultadoConsulta10[0]}"></td>
+                <td th:text="${resultadoConsulta10[1]}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="/">Volver Inicio</a>
+        <a href="/pagina1">Volver a Página 1</a>
+    </div>
+</body>
+</html>

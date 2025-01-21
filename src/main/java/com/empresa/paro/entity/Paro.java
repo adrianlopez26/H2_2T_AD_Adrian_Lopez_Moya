@@ -1,25 +1,24 @@
+// Paro.java
 package com.empresa.paro.entity;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "paro")
 public class Paro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int identificador;
 
-    @Column(name = "Sexo")
     private String sexo;
 
-    @Column(name = "Edad")
     private String edad;
 
-    @Column(name = "Periodo")
     private String periodo;
 
     @Column(name = "Total")
-    private double total;
+    private Double total;
 
     @ManyToOne
     @JoinColumn(name = "CodigoComunidad", referencedColumnName = "Codigo")
@@ -58,11 +57,11 @@ public class Paro {
         this.periodo = periodo;
     }
 
-    public double getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
