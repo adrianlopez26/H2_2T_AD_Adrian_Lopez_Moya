@@ -7,16 +7,22 @@ public class Paro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int identificador; // Identificador único (PK)
+    private int identificador;
 
-    private String sexo;       // Sexo del desempleado
-    private String edad;       // Grupo de edad
-    private String periodo;    // Periodo (por ejemplo, 2023-Q1)
-    private double total;      // Total de desempleados
+    @Column(name = "Sexo")
+    private String sexo;
 
-    // Relación ManyToOne: un registro de paro pertenece a una comunidad
+    @Column(name = "Edad")
+    private String edad;
+
+    @Column(name = "Periodo")
+    private String periodo;
+
+    @Column(name = "Total")
+    private double total;
+
     @ManyToOne
-    @JoinColumn(name = "codigoComunidad", nullable = false)
+    @JoinColumn(name = "CodigoComunidad", referencedColumnName = "Codigo")
     private Comunidad comunidad;
 
     // Getters y setters
@@ -68,4 +74,3 @@ public class Paro {
         this.comunidad = comunidad;
     }
 }
-

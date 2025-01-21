@@ -2,28 +2,28 @@ package com.empresa.paro.controller;
 
 import com.empresa.paro.repository.ParoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
-@RestController
+@Controller
 public class AnalisisController {
 
     @Autowired
     private ParoRepository paroRepository;
 
-    // Total de desempleo por comunidad
-    @GetMapping("/total-desempleo-por-comunidad")
-    public List<Object[]> totalDesempleoPorComunidad() {
-        return paroRepository.totalDesempleoPorComunidad();
+    @GetMapping("/resultados")
+    public String mostrarResultados(Model model) {
+        model.addAttribute("desempleoPorComunidad", paroRepository.totalDesempleoPorComunidad());
+        model.addAttribute("desempleoPorSexo", paroRepository.totalDesempleoPorSexo());
+        model.addAttribute("desempleoPorEdad", paroRepository.totalDesempleoPorEdad());
+        model.addAttribute("promedioDesempleo", paroRepository.promedioDesempleoPorComunidad());
+        model.addAttribute("mayorDesempleo", paroRepository.comunidadConMayorDesempleo());
+        model.addAttribute("menorDesempleo", paroRepository.comunidadConMenorDesempleo());
+        model.addAttribute("desempleoPorSexoComunidad", paroRepository.desempleoPorSexoYComunidad());
+        model.addAttribute("tendenciaPorPeriodo", paroRepository.tendenciaDesempleoPorPeriodo());
+        model.addAttribute("porcentajePorSexo", paroRepository.porcentajeDesempleoPorSexo());
+        model.addAttribute("desempleoRangoEdad", paroRepository.desempleoPorComunidadYRangoEdad());
+        return "resultados";
     }
-
-    // Total de desempleo por sexo en una comunidad específica
-    @GetMapping("/total-por-sexo")
-    public List<Object[]> totalPorSexoEnComunidad(@RequestParam String codigo) {
-        return paroRepository.totalPorSexoEnComunidad(codigo);
-    }
-
 }
-

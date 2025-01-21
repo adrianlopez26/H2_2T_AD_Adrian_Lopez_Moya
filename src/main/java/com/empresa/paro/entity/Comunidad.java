@@ -7,14 +7,14 @@ import java.util.List;
 public class Comunidad {
 
     @Id
-    private String codigo; // Código de la comunidad (PK)
+    @Column(name = "Codigo", length = 2)
+    private String codigo;
 
-    @Column(nullable = false)
-    private String comunidad; // Nombre de la comunidad
+    @Column(name = "Comunidad")
+    private String comunidad;
 
-    // Relación OneToMany: una comunidad puede tener múltiples registros de paro
     @OneToMany(mappedBy = "comunidad", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Paro> paroList;
+    private List<Paro> paros;
 
     // Getters y setters
     public String getCodigo() {
@@ -33,11 +33,11 @@ public class Comunidad {
         this.comunidad = comunidad;
     }
 
-    public List<Paro> getParoList() {
-        return paroList;
+    public List<Paro> getParos() {
+        return paros;
     }
 
-    public void setParoList(List<Paro> paroList) {
-        this.paroList = paroList;
+    public void setParos(List<Paro> paros) {
+        this.paros = paros;
     }
 }
