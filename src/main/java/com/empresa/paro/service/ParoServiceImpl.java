@@ -13,6 +13,11 @@ public class ParoServiceImpl implements ParoService {
     private ParoRepository paroRepository;
 
     @Override
+    public List<Object[]> findPromedioDesempleoPorPeriodoFiltrado(String sexo, String edad, String anio) {
+        return paroRepository.findPromedioDesempleoPorPeriodoFiltrado(sexo, edad, anio);
+    }
+
+    @Override
     public List<Object[]> getTotalDesempleoPorComunidad() {
         return paroRepository.findTotalDesempleoPorComunidad();
     }

@@ -18,6 +18,7 @@ public class Comunidad {
     private List<Paro> paros;
 
     // Getters y setters
+
     public String getCodigo() {
         return codigo;
     }

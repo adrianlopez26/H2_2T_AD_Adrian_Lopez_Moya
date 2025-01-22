@@ -3,6 +3,7 @@ package com.empresa.paro.service;
 import java.util.List;
 
 public interface ParoService {
+    List<Object[]> findPromedioDesempleoPorPeriodoFiltrado(String sexo, String edad, String anio);
     List<Object[]> getTotalDesempleoPorComunidad();
     List<Object[]> getPorcentajeDesempleoPorSexo();
     List<Object[]> getPromedioDesempleoPorPeriodo();

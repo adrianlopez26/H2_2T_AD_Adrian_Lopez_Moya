@@ -9,7 +9,7 @@ public class Paro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int identificador;
+    private Long identificador;
 
     private String sexo;
 
@@ -25,11 +25,11 @@ public class Paro {
     private Comunidad comunidad;
 
     // Getters y setters
-    public int getIdentificador() {
+    public Long getIdentificador() {
         return identificador;
     }
 
-    public void setIdentificador(int identificador) {
+    public void setIdentificador(Long identificador) {
         this.identificador = identificador;
     }
 

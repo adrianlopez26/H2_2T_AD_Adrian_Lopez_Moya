@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Página 3</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Resultados de los Análisis - Página 3</h1>
+
+    <h2>Filtros</h2>
+    <form id="filtersForm" action="/pagina3" method="get">
+        <label>Sexo:</label>
+        <input type="radio" id="sexoM" name="sexo" value="M" th:checked="${sexo == 'M'}"> Masculino
+        <input type="radio" id="sexoF" name="sexo" value="F" th:checked="${sexo == 'F'}"> Femenino
+
+        <label>Edad:</label>
+        <input type="radio" id="edad1" name="edad" value="18-25" th:checked="${edad == '18-25'}"> 18-25
+        <input type="radio" id="edad2" name="edad" value="26-35" th:checked="${edad == '26-35'}"> 26-35
+        <input type="radio" id="edad3" name="edad" value="36-45" th:checked="${edad == '36-45'}"> 36-45
+        <input type="radio" id="edad4" name="edad" value="46-55" th:checked="${edad == '46-55'}"> 46-55
+        <input type="radio" id="edad5" name="edad" value="56+" th:checked="${edad == '56+'}"> 56+
+
+        <button type="submit">Aplicar Filtros</button>
+    </form>
+
+    <h2>Promedio de Desempleo por Período</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Período</th>
+            <th>Promedio Desempleo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resultado : ${resultados}">
+            <td th:text="${resultado[0]}"></td>
+            <td th:text="${resultado[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/">Volver Inicio</a>
+</div>
+</body>
+</html>

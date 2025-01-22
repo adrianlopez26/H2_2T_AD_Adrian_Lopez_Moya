@@ -3,12 +3,20 @@ package com.empresa.paro.repository;
 import com.empresa.paro.entity.Paro;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface ParoRepository extends CrudRepository<Paro, Integer> {
+
+    @Query("SELECT p.sexo, p.edad, p.periodo, p.total " +
+            "FROM Paro p " +
+            "WHERE (:sexo IS NULL OR p.sexo = :sexo) " +
+            "AND (:edad IS NULL OR p.edad = :edad) " +
+            "AND (:anio IS NULL OR p.periodo = :anio)")
+    List<Object[]> findPromedioDesempleoPorPeriodoFiltrado(@Param("sexo") String sexo, @Param("edad") String edad, @Param("anio") String anio);
 
     // Consulta 1: Total desempleo por comunidad
     @Query(value = "SELECT c.Comunidad, SUM(p.Total) AS Total FROM paro p JOIN comunidad c ON p.CodigoComunidad = c.Codigo GROUP BY c.Comunidad", nativeQuery = true)
